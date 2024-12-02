@@ -8,6 +8,7 @@ public class LimsWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LimsWebApplication.class, args);
+        System.out.println("asdasdsa");
     }
 
 }
