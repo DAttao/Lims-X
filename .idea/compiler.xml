@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Lims-web" />
+        <module name="Lims-sys" />
+        <module name="Lims-base" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Lims-base" target="1.8" />
+      <module name="Lims-sys" target="1.8" />
+      <module name="Lims-web" target="1.8" />
+      <module name="Lims-X" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Lims-X" options="-parameters" />
+      <module name="Lims-base" options="-parameters" />
+      <module name="Lims-sys" options="-parameters" />
+      <module name="Lims-web" options="-parameters" />
+    </option>
+  </component>
+</project>

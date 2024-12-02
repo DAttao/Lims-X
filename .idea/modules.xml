@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lims-X.iml" filepath="$PROJECT_DIR$/Lims-X.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lims-base/Lims-base.iml" filepath="$PROJECT_DIR$/Lims-base/Lims-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lims-sys/Lims-sys.iml" filepath="$PROJECT_DIR$/Lims-sys/Lims-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lims-web/Lims-web.iml" filepath="$PROJECT_DIR$/Lims-web/Lims-web.iml" />
+    </modules>
+  </component>
+</project>
