@@ -24,14 +24,14 @@ public class UserUtil {
     }
 
     /**
-     * 获取当前登录用户的权限
-     * @return 当前登录用户的权限
+     * 获取当前登录用户的信息
+     * @return 当前登录用户的信息
      */
-    public static Collection<? extends GrantedAuthority> getCurrentStationId() {
+    public static LoginUser getCurrentLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof LoginUser) {
             LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-            return loginUser.getAuthorities(); // 假设LoginUser中有getUser()方法返回用户对象，并且用户对象有getId()方法
+            return loginUser;
         }
         return null;
     }
