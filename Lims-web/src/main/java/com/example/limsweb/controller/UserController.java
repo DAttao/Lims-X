@@ -11,6 +11,7 @@ import com.example.limsbase.service.UserService;
 import com.example.limsbase.util.Md5Utils;
 import com.example.limsbase.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class UserController {
     private UserRoleMapper userRoleMapper;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('systerm:user:insert')")
     public Result<?> addUser(@RequestBody User user){
         // 在保存用户之前对密码进行MD5加密
         if (!StringUtils.isEmpty(user.getPassword())) {
