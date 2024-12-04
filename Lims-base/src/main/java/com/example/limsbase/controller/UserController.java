@@ -46,14 +46,16 @@ public class UserController {
         return  userService.logout();
     }
 
-
     @GetMapping("/getCurrentLoginUser")
     public Result<?> getLoginUser() {
-
         return Result.OK(getCurrentLoginUser());
     }
+
+// 以下功能模块都需要加入权限字段
+
+
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('systerm:user:insert')")
+    @PreAuthorize("hasAuthority('systerm:user:insert')")//权限字段
     public Result<?> addUser(@RequestBody User user){
         // 在保存用户之前对密码进行MD5加密
         if (!StringUtils.isEmpty(user.getPassword())) {
@@ -61,7 +63,7 @@ public class UserController {
         }
 
         userService.save(user);
-        //默认权限就是超级管理员
+        //默认权限就是超级管理员，有能力可以实现权限的绑定等功能
         userRoleMapper.insert(new UserRole(user.getId().toString(),"1"));
 
         return Result.OK("添加成功") ;
