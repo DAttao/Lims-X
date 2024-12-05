@@ -1,6 +1,7 @@
 package com.example.limsbase.controller;
 
 import com.aliyuncs.utils.StringUtils;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.limsbase.bean.User;
 import com.example.limsbase.bean.UserRole;
 import com.example.limsbase.mapper.UserRoleMapper;
@@ -54,6 +55,13 @@ public class UserController {
 // 以下功能模块都需要加入权限字段
 
 
+    @GetMapping("/list")
+    @PreAuthorize("hasAuthority('systerm:user:list')")//权限字段
+    public Result<?> listUser(@RequestBody User user){
+        return Result.OK("查询成功",userService.list()) ;
+    }
+
+
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('systerm:user:insert')")//权限字段
     public Result<?> addUser(@RequestBody User user){
@@ -69,5 +77,29 @@ public class UserController {
         return Result.OK("添加成功") ;
     }
 
+    @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('systerm:user:edit')")//权限字段
+    public Result<?> editUser(@RequestBody User user){
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set("id",user.getId());
+
+        if (!StringUtils.isEmpty(user.getPassword())) {
+            updateWrapper.set("password", Md5Utils.md5Encode(user.getPassword(), "UTF-8"));
+        }
+
+
+        userService.update(updateWrapper);
+
+        return Result.OK("修改成功") ;
+    }
+
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('systerm:user:delete')")//权限字段
+    public Result<?> deleteUser(@PathVariable Long id){
+        userService.removeById(id);
+
+        return Result.OK("删除成功") ;
+    }
 
 }
