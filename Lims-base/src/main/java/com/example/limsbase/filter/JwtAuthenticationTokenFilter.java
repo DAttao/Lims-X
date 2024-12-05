@@ -29,7 +29,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取token
-        String token = request.getHeader("aToken");
+        String token = request.getHeader("token");
         if (!StringUtils.hasText(token)) {
             //放行
             filterChain.doFilter(request, response);
@@ -63,7 +63,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 //    @Override
 //    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 //        // 获取 token
-//        String token = request.getHeader("aToken"); // Web 端使用 aToken 头
+//        String token = request.getHeader("token"); // Web 端使用 token 头
 //        if (!StringUtils.hasText(token)) {
 //            token = request.getHeader("staffToken"); // 小程序端使用 staffToken 头
 //        }
@@ -87,7 +87,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 //        }
 //
 //        // 根据 token 来源设置 Redis 键的前缀和用户对象类型
-//        if (request.getHeader("aToken") != null) {
+//        if (request.getHeader("token") != null) {
 //            redisKeyPrefix = "loginUserId:";
 //            userObject = redisCache.getCacheObject(redisKeyPrefix + userid, LoginUser.class);
 //        } else {

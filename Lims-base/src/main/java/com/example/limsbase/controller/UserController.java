@@ -57,8 +57,10 @@ public class UserController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('systerm:user:list')")//权限字段
-    public Result<?> listUser(@RequestBody User user){
-        return Result.OK("查询成功",userService.list()) ;
+    public Result<?> listUser(@RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "0") int pageSize,
+                              User user){
+        return userService.selectList(page, pageSize, user) ;
     }
 
 

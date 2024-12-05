@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -61,7 +63,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         return Result.OK("登陆成功",map);
     }
-
+    @Override
+    public Result<?> selectList(int page, int pageSize, User user) {
+        int startIndex = (page-1)*pageSize;
+        List<?> list = userMapper.selectList(startIndex, pageSize, user);
+        int total = userMapper.selectListTotal(user);
+        Map<String, Object> result = new HashMap<>();
+        result.put("list", list);
+        result.put("total", total);
+        return Result.OK("查询成功",result);
+    }
     @Override
     public Result<String> logout() {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
