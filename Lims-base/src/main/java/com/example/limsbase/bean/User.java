@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -76,7 +77,7 @@ public class User implements Serializable {
     */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @JsonFormat(pattern =  "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private LocalDateTime createTime;
     /**
     * 更新人
     */
@@ -87,11 +88,12 @@ public class User implements Serializable {
     */
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern =  "yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
+    private LocalDateTime updateTime;
     /**
     * 删除标志（0代表未删除，1代表已删除）
     */
     @TableField("del_flag")
+//    @TableLogic //逻辑删除注解 建议手动实现
     private Integer delFlag;
 
     @TableField(exist = false)

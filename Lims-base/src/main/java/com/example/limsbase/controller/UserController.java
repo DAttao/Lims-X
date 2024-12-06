@@ -67,41 +67,22 @@ public class UserController {
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('systerm:user:insert')")//权限字段
     public Result<?> addUser(@RequestBody User user){
-        // 在保存用户之前对密码进行MD5加密
-        if (!StringUtils.isEmpty(user.getPassword())) {
-            user.setPassword(Md5Utils.md5Encode(user.getPassword(), "UTF-8"));
-        }
-
-        userService.save(user);
-        //默认权限就是超级管理员，有能力可以实现权限的绑定等功能
-        userRoleMapper.insert(new UserRole(user.getId().toString(),"1"));
-
-        return Result.OK("添加成功") ;
+        return userService.addUser(user);
     }
 
     @PostMapping("/edit")
     @PreAuthorize("hasAuthority('systerm:user:edit')")//权限字段
     public Result<?> editUser(@RequestBody User user){
-        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.set("id",user.getId());
-
-        if (!StringUtils.isEmpty(user.getPassword())) {
-            updateWrapper.set("password", Md5Utils.md5Encode(user.getPassword(), "UTF-8"));
-        }
-
-
-        userService.update(updateWrapper);
-
-        return Result.OK("修改成功") ;
+        return userService.editUser(user);
     }
 
 
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('systerm:user:delete')")//权限字段
     public Result<?> deleteUser(@PathVariable Long id){
-        userService.removeById(id);
+        ;
 
-        return Result.OK("删除成功") ;
+        return userService.logicDelete(id) ;
     }
 
 }

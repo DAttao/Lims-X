@@ -6,6 +6,14 @@
             *
         FROM
             sys_user su
+        where
+            su.del_flag = 0
+        <if test="user.userName != null and user.userName != '' ">
+            and su.user_name LIKE CONCAT('%', #{user.userName}, '%')
+        </if>
+        <if test="user.nickName != null and user.nickName != '' ">
+            and su.nick_name LIKE CONCAT('%', #{user.nickName}, '%')
+        </if>
         <if test="pageSize != 0">
             LIMIT #{startIndex}, #{pageSize}
         </if>;
@@ -14,6 +22,14 @@
         SELECT
         COUNT(*)
         FROM
-        sys_user su;
+        sys_user su
+        where
+        su.del_flag = 0
+        <if test="user.userName != null and user.userName != '' ">
+            and su.user_name LIKE CONCAT('%', #{user.userName}, '%')
+        </if>
+        <if test="user.nickName != null and user.nickName != '' ">
+            and su.nick_name LIKE CONCAT('%', #{user.nickName}, '%')
+        </if>;
     </select>
 </mapper>
